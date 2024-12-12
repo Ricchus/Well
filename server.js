@@ -14,6 +14,9 @@ let database = {
 app.use(cors());
 app.use(bodyParser.json());
 app.use(express.static("public"));
+app.get("/", (req, res) => {
+  res.send("App is running! Access /pageA.html or /pageB.html.");
+});
 
 // Route to handle submissions from Page A
 app.post("/submitA", (req, res) => {
