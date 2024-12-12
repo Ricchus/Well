@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+  <title>Page B</title>
+</head>
+<body>
+  <h1>Page B</h1>
+  <textarea id="inputB" placeholder="Enter content for Page B" style="width: 300px; height: 100px;"></textarea><br>
+  <button id="submitB">Submit</button>
+
+  <script>
+    $(document).ready(function () {
+      $("#submitB").click(function () {
+        const content = $("#inputB").val();
+
+        // Send data to the server
+        $.ajax({
+          url: "/submitB",
+          type: "POST",
+          contentType: "application/json",
+          data: JSON.stringify({ content }),
+          success: function (response) {
+            alert(response.message);
+          },
+          error: function () {
+            alert("Failed to send data from Page B.");
+          }
+        });
+      });
+    });
+  </script>
+</body>
+</html>

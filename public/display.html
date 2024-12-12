@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+  <title>Display Page</title>
+</head>
+<body>
+  <h1>Display Page</h1>
+  <div id="display">
+    <p>Loading data...</p>
+  </div>
+
+  <script>
+    $(document).ready(function () {
+      function fetchData() {
+        $.ajax({
+          url: "/data",
+          type: "GET",
+          success: function (data) {
+            const display = `
+              <p><strong>Content from Page A:</strong> ${data.pageA || "No input yet"}</p>
+              <p><strong>Content from Page B:</strong> ${data.pageB || "No input yet"}</p>
+            `;
+            $("#display").html(display);
+          },
+          error: function () {
+            $("#display").html("<p>Failed to fetch data.</p>");
+          }
+        });
+      }
+
+      // Fetch data every 2 seconds
+      fetchData();
+      setInterval(fetchData, 2000);
+    });
+  </script>
+</body>
+</html>
